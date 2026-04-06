@@ -4,6 +4,21 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="f112VNX021MI7akYttRF-83" parent="1" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;autosizeText=0;fontSize=42;" value="&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; text-align: start; white-space-collapse: preserve-breaks;&quot;&gt;Интернет-банк&lt;/strong&gt;" vertex="1">
+          <mxGeometry height="250" width="310" x="-660" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="f112VNX021MI7akYttRF-84" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontColor=default;labelBackgroundColor=none;autosizeText=0;fontSize=19;" value="&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; text-align: start; white-space-collapse: preserve-breaks;&quot;&gt;Автоматизированная&lt;/strong&gt;&lt;div&gt;&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; text-align: start; white-space-collapse: preserve-breaks;&quot;&gt;банковская система (АБС)&lt;/strong&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="250" width="310" x="-670" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="f112VNX021MI7akYttRF-85" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=default;fontColor=default;labelBackgroundColor=default;" value="&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-line; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;Система кол-центра&lt;/strong&gt;" vertex="1">
+          <mxGeometry height="250" width="310" x="-660" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="f112VNX021MI7akYttRF-86" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=default;fontColor=default;labelBackgroundColor=default;" value="&lt;div style=&quot;text-align: start;&quot;&gt;&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; white-space-collapse: preserve-breaks;&quot;&gt;Телеком-оператор&lt;/strong&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="250" width="310" x="-659" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="f112VNX021MI7akYttRF-87" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=default;fontColor=default;labelBackgroundColor=default;" value="&lt;div style=&quot;text-align: start;&quot;&gt;&lt;strong style=&quot;box-sizing: inherit; font-family: &amp;quot;YS Text&amp;quot;, sans-serif; font-size: 18px; white-space-collapse: preserve-breaks;&quot;&gt;Сайт&lt;/strong&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="250" width="310" x="-650" y="1420" as="geometry" />
+        </mxCell>
         <mxCell id="f112VNX021MI7akYttRF-1" parent="1" style="shape=table;childLayout=tableLayout;startSize=40;collapsible=0;recursiveResize=0;expand=0;fontSize=16;strokeColor=default;swimlaneHead=1;swimlaneBody=1;horizontal=1;columnLines=1;" value="Карта текущего IT-ландшафта" vertex="1">
           <mxGeometry height="1540.000000000001" width="1620" x="-200" y="200" as="geometry" />
         </mxCell>
