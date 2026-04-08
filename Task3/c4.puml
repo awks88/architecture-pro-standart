@@ -1,0 +1,55 @@
+@startuml Архитектурные решения для депозита
+
+title Архитектурные решения для депозита
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(newClient, "Новый клиент", "Пользователь незарегистрированный в интернет-банке")
+Person(client, "Клиент", "Пользователь интернет-банка")
+Person(operator, "Оператор коллцентра", "Сотрудник, обрабатывающий заявки клиентов")
+Person(emploeeBackoffice, "Сотрудник бэк-офиса", "Сотрудник, обрабатывающий заявки клиентов в бэк-офисе")
+
+System(site, "Сайт банка", "Платформа для получения информации о продуктах и услугах банка")
+System_Boundary(internetBank, "Интернет-банк", "Система для управления банковскими продуктами и услугами") {
+  System_Boundary(outsource, "Аутсорсинговая компания", "Компания, предоставляющая услуги по разработке и поддержке интернет-банка") {
+    Container(webApp, "Веб-приложение", ".NET Framework 4.5, ASP.NET MVC 4.5")
+    ContainerDb(sqlServer, "База данных", "MS SQL Server")
+  }
+
+  System_Boundary(deposit, "Депозит", "Система для управления депозитами") {
+    Container(depositService, "Сервис управления депозитами", "Java, Spring Boot")
+  }
+
+
+}
+System(callCenter, "Система коллцентра", "Платформа для оперторов коллцентра")
+System_Boundary(abs, "Автоматизированная банковская система", "Система для обработки банковских операций") {
+  Container(absDescktop, "Десктопное приложение", "Delphi")
+  ContainerDb(oracle, "База данных", "Oracle")
+
+  Container(depositBackoffice, "Сервис бэк-офиса", "Java, Spring Boot")
+  Container(queue, "Очередь сообщений", "Kafka")
+
+}
+System(SmsGateway, "Смс шлюз", "Система для отправки смс клиентам")
+System_Ext(telecomOperator, "Телеком оператор", "Провайдер услуг мобильной связи")
+
+Rel(newClient, site, "Оставляет заявку на открытие депозита")
+Rel(site, callCenter, "Отправляет заявку на открытие депозита")
+Rel(callCenter, operator, "Оператор обрабатывает заявку")
+Rel(operator, newClient, "Связывается с клиентом для предложение условий депозита")
+
+Rel(client, webApp, "Управляет своими депозитами")
+Rel(webApp, depositService, "Отправляет заявку на открытие депозита")
+Rel(emploeeBackoffice, absDescktop, "Подтверждает открытие депозита")
+Rel(abs, SmsGateway, "Отправляет смс уведомление о открытии депозита")
+Rel(SmsGateway, telecomOperator, "Отправляет смс клиенту")
+
+Rel(webApp, sqlServer, "Сохраняет данные о клиентах и депозитах")
+Rel(absDescktop, oracle, "Сохраняет данные о клиентах и депозитах")
+
+Rel(depositService, queue, "Отправляет заявку на обработку")
+Rel(depositBackoffice, queue, "Забирает новые заявки в зависимости от нагрузки и времени")
+Rel(depositBackoffice, oracle, "Сохраняет данные о клиентах и депозитах")
