@@ -1,0 +1,28 @@
+@startuml Архитектурные решения для депозита
+
+title Архитектурные решения для депозита
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(client, "Клиент", "Пользователь интернет-банка")
+
+System_Boundary(callCenter, "Колл-центр", "Система для обработки звонков клиентов") {
+  Person(operator, "Оператор коллцентра", "Сотрудник отвечающий на звонки клиентов")
+  Person(operatorExt, "Оператор партнерского колл-центра", "Сотрудник партнерского колл-центра")
+  System(callCenterService, "Система коллцентра", "Сервис для работы операторов коллцентра")
+}
+
+System(absService, "Автоматизированная банковская система", "Система для обработки банковских операций")
+System(ratesService, "Сервис обработки банковских ставок", "Java, Spring Boot")
+SystemDb(s3, "Хранилище", "S3")
+
+Rel(client, callCenter, "Звонит в колл-центр для уточнение ставки по депозиту")
+
+Rel(operator, callCenterService, "Уточняет ставку по депозиту")
+
+Rel(absService, ratesService, "Получает актуальные ставки по депозиту", "REST API")
+Rel(ratesService, s3, "Сохраняет актуальные ставки по депозиту")
+Rel(callCenterService, s3, "Получает актуальные ставки по депозиту", "HTTPS")
+Rel(operatorExt, s3, "Получает актуальные ставки по депозиту", "HTTPS")

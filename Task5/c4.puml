@@ -1,0 +1,55 @@
+@startuml Архитектурные решения для депозита
+
+title Архитектурные решения для депозита
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(newClient, "Новый клиент", "Пользователь незарегистрированный в интернет-банке")
+Person(client, "Клиент", "Пользователь интернет-банка")
+Person(emploeeBackoffice, "Сотрудник бэк-офиса", "Сотрудник, обрабатывающий заявки клиентов в бэк-офисе")
+
+System_Boundary(internetBank, "Интернет-банк", "Система для управления банковскими продуктами и услугами") {
+  System(webApp, "Веб-приложение", "Платформа для управления банковскими продуктами и услугами")
+  System(site, "Сайт банка", "Платформа для получения информации о продуктах и услугах банка")
+}
+
+System_Boundary(creditPipeline, "Кредитный конвейер", "Система для обработки заявок на кредитные продукты") {
+  Container(creditScoring, "Сервис скоринга", "Python, Flask")
+}
+
+System_Boundary(abs, "Автоматизированная банковская система", "Система для обработки банковских операций") {
+  Container(absDescktop, "Десктопное приложение", "Delphi")
+  ContainerDb(oracle, "База данных", "Oracle")
+}
+
+System_Boundary(creditSystem, "Кредитная система", "Система для управления кредитными продуктами") {
+  Container(creditService, "Сервис кредитования", "Java, Spring Boot")
+  Container(queue, "Очередь сообщений", "Kafka")
+}
+
+System_Ext(creditHistory, "Бюро кредитных историй", "Поставщик данных о кредитной истории клиентов")
+
+System(SmsGateway, "Смс шлюз", "Система для отправки смс клиентам")
+System_Ext(telecomOperator, "Телеком оператор", "Провайдер услуг мобильной связи")
+
+Rel(absDescktop, oracle, "Получает данные о клиентах и кредитных продуктах")
+
+Rel(newClient, site, "Подает заявку на кредит")
+Rel(site, creditService, "Отправляет заявку на кредит")
+
+Rel(creditService, creditScoring, "Запрашивает скоринг клиента")
+Rel(creditService, oracle, "Получает данные о клиентах и кредитных продуктах")
+Rel(creditScoring, creditHistory, "Запрашивает кредитную историю клиента")
+Rel(queue, oracle, "Сохраняет данные заявки на кредит")
+Rel(creditService, queue, "Отправляет заявку на кредит в очередь для обработки")
+
+Rel(queue, SmsGateway, "Отправляет уведомление о статусе заявки на кредит")
+Rel(SmsGateway, telecomOperator, "Отправляет смс клиенту")
+
+Rel(emploeeBackoffice, absDescktop, "Обрабатывает заявки на кредит в бэк-офисе")
+
+Rel(client, webApp, "Управляет своими кредитами через Интернет-банк")
+Rel(client, webApp, "Подтверждает заявку на кредит смс-кодом")
+Rel(webApp, creditService, "Оформляет заявку на кредит")
